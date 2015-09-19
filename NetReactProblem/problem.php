@@ -12,12 +12,11 @@ printKey($duplicatedArr);
 
 function printKey($arr){
     $tempMax=0;
+	echo "the most common duplicates are: ";
     foreach($arr as $key=>$var){
         if($var>=$tempMax){
             $tempMax=$var;
-            echo "\t";
-            echo $key;
-            echo "\t";
+            echo $key."\t";
         }else{
             break;
         }
