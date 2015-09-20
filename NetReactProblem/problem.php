@@ -1,13 +1,19 @@
 <?php
 ini_set('max_execution_time', 300);
-$n = rand();
-$m = rand();
 
-$simpleArr = simple($n, $m);
-$duplicatedArr = array_count_values($simpleArr);
-$simpleArr = array_unique($simpleArr);
-arsort($duplicatedArr);
-printKey($duplicatedArr);
+/**
+ *
+ */
+function main()
+{
+    $n = rand();
+    $m = rand();
+    $simpleArr = generatePrimeArr($n, $m);
+    $duplicatedArr = array_count_values($simpleArr);
+    $simpleArr = array_unique($simpleArr);
+    arsort($duplicatedArr);
+    printKey($duplicatedArr);
+}
 
 /**
  * Prints the most common duplicates
@@ -33,8 +39,8 @@ function printKey($arr)
  * @param $max - the max value of the elements
  * @return array - the simple number array
  */
- 
-function simple($number, $max)
+
+function generatePrimeArr($number, $max)
 {
     $outputArr = [];
     while (count($outputArr) != $number) {
@@ -51,14 +57,25 @@ function simple($number, $max)
  * @param $var - variable
  * @return bool - the result
  */
- 
+
 function isSimple($var)
 {
-    for ($i = 2; $i < $var; $i++) {
-        if ($var % $i == 0) {
-            return false;
+    if ($var < 2) {
+        return false;
+    } else if ($var <= 3) {
+        return true;
+    } else if (($var % 2 == 0) || ($var % 3 == 0)) {
+        return false;
+    } else {
+        for ($i = 5; $i * $i <= $var; $i += 6) {
+            if (($var % $i == 0) || ($var % ($i + 2) == 0)) {
+                return false;
+            }
         }
     }
     return true;
 }
+
+main();
+
 ?>
